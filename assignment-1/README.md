@@ -15,13 +15,19 @@
 
 	* c) How large (in bytes) is the directory **sws1-SNUMBER1-SNUMBER2**? Write your answer to a file called **1b.txt** and place this file in the **exercise1** directory.
 		* **Answer:**
-		* `# du -sb sws1-4226887
-16443	sws1-4226887`
+		* `# du -sb sws1-4226887` => 16443	sws1-4226887
 		* The size of the folder is therefore 16443 bytes. The command du is an abbreviation for disk usage. The flags -sb stand for summarize and bytes.
 		* `# du -sb sws1-4226887/ | awk '{print $1}' > sws1-4226887/exercise1/1b.txt`
-		* In the above command the output of du is piped through awk which prints the first column of the output which happens to be the size of the sws1-4226887 folder. The output from awk is then written into the target file 1b.txt which gets automatically created on the fly. Btw, awk is a script language for editing textual data and awk actually stands the surnames of its creators: Alfred V. Aho, Peter J. Weinberger and Brian W. Kernighan.
+		* In the above command the output of du is piped through awk which prints the first column of the output which happens to be the size of the sws1-4226887 folder. The output from awk is then written into the target file 1b.txt which gets automatically created on the fly. Btw, awk is a script language for editing textual data and awk actually stands for the surnames of its creators: Alfred V. Aho, Peter J. Weinberger and Brian W. Kernighan.
 
 	* d) Write all commands that you used for the other parts of this exercise to a text file called **commands** and place this file in the **exercise1** directory.
+		* ```
+		mkdir sws1-4226887
+		mkdir sws1-4226887/exercise1 sws1-4226887/exercise2 sws1-4226887/exercise3
+		echo 'Christoph Schmidl, s4226887, c.schmidl@student.ru.nl' > sws1-4226887/names.txt
+		du -sb sws1-4226887
+		du -sb sws1-4226887/ | awk '{print $1}' > sws1-4226887/exercise1/1b.txt
+		```
 
 2. Download the file [http://cryptojedi.org/peter/teaching/genome.txt](http://cryptojedi.org/peter/teaching/genome.txt). You will see that it consists of 500 lines, each consisting of 100 characters, each of those characters being A,C,G, or T. See the content in this file as one long sequence of genome.
 
