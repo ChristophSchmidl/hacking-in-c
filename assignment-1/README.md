@@ -27,7 +27,7 @@
 			echo 'Christoph Schmidl, s4226887, c.schmidl@student.ru.nl' > sws1-4226887/names.txt
 			du -sb sws1-4226887
 			du -sb sws1-4226887/ | awk '{print $1}' > sws1-4226887/exercise1/1b.txt
-		```
+			```
 
 2. Download the file [http://cryptojedi.org/peter/teaching/genome.txt](http://cryptojedi.org/peter/teaching/genome.txt). You will see that it consists of 500 lines, each consisting of 100 characters, each of those characters being A,C,G, or T. See the content in this file as one long sequence of genome.
 
