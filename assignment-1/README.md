@@ -5,12 +5,21 @@
 1. Log into a Linux machine, aither locally, or through ssh into **lilo.science.ru.nl** or **stitch.science.ru.nl**.
 
 	* a) Use the command line to create a directory called **sws1-SNUMBER1-SNUMBER2**. In this directory, create 3 subdirectories called **exercise1**, **exercise2** and **exercise3**.
-		* `mkdir sws1-4226887`
-		* `mkdir sws1-4226887/exercise1 sws1-4226887/exercise2 sws1-4226887/exercise3`
+		* **Answer:**
+		* `# mkdir sws1-4226887`
+		* `# mkdir sws1-4226887/exercise1 sws1-4226887/exercise2 sws1-4226887/exercise3`
 
 	* b) Write a text file called **names.txt** with your names and student S-numbers and place this file into the directory **sws1-SNUMBER1-SNUMBER2**
+		* **Answer:**
+		* `# echo 'Christoph Schmidl, s4226887, c.schmidl@student.ru.nl' > sws1-4226887/names.txt`
 
 	* c) How large (in bytes) is the directory **sws1-SNUMBER1-SNUMBER2**? Write your answer to a file called **1b.txt** and place this file in the **exercise1** directory.
+		* **Answer:**
+		* `# du -sb sws1-4226887
+16443	sws1-4226887`
+		* The size of the folder is therefore 16443 bytes. The command du is an abbreviation for disk usage. The flags -sb stand for summarize and bytes.
+		* `# du -sb sws1-4226887/ | awk '{print $1}' > sws1-4226887/exercise1/1b.txt`
+		* In the above command the output of du is piped through awk which prints the first column of the output which happens to be the size of the sws1-4226887 folder. The output from awk is then written into the target file 1b.txt which gets automatically created on the fly. Btw, awk is a script language for editing textual data and awk actually stands the surnames of its creators: Alfred V. Aho, Peter J. Weinberger and Brian W. Kernighan.
 
 	* d) Write all commands that you used for the other parts of this exercise to a text file called **commands** and place this file in the **exercise1** directory.
 
