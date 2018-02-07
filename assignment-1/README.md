@@ -5,6 +5,8 @@
 1. Log into a Linux machine, aither locally, or through ssh into **lilo.science.ru.nl** or **stitch.science.ru.nl**.
 
 	* a) Use the command line to create a directory called **sws1-SNUMBER1-SNUMBER2**. In this directory, create 3 subdirectories called **exercise1**, **exercise2** and **exercise3**.
+		* `mkdir sws1-4226887`
+		* `mkdir sws1-4226887/exercise1 sws1-4226887/exercise2 sws1-4226887/exercise3`
 
 	* b) Write a text file called **names.txt** with your names and student S-numbers and place this file into the directory **sws1-SNUMBER1-SNUMBER2**
 
