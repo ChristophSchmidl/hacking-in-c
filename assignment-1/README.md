@@ -45,6 +45,39 @@
 		* To fix the problem with newlines interrupting the matching process, the tr command is used (translate or delete characters). Tr is reading in the content of genome.txt and is deleting newlines ('\n') in memory. It is therefore no in-place functionality. After removing all newlines, we essentially are left with one long line which we can pipe towards grep. Grep is used for the matching process with the -o flag (--only-matching) which gives us the occurences of a word every time although it might occur several times in the same line. Without the -o flag, grep only prints out matching lines. So, everytime grep finds the pattern, it prints out the pattern in a new line. All we have to to now is counting the occurences which can be done by the wc command (word count) with either the -w flag (words) or -l (lines) flag. In this scenario it does not really matter. The total occurence of the word GATTACA is therefore 4. 
 
 	* b) Write a shell script called **genome.sh**, which receives as first argument a filename and as second argument a string, and prints, how often the string appears in the file, also counting occurrences of the search string being spread over several lines. Place the script **genome.sh** into the **exercise2** directory.
+		* **Answer:**
+		* ```
+			#!/bin/bash
+
+			# https://linuxconfig.org/bash-scripting-tutorial
+
+			# first arugment = filename/path
+			# second arugment = string for matching
+			# echo "$0" -> name of the script: ./genome.sh
+			# echo "$#" -> number of arguments supplied without $0
+
+			# Check for the right amount of arguments
+			if [ $# -ne 2 ]
+			  then
+			    echo -e "\nPlease call '$0 <filepath> <pattern>' to run this command! You have to provide two arguments.\n"
+			    exit 1
+			fi
+
+			# Check if file exists
+			if [ ! -f $1 ]
+			  then
+			    echo "Error. File does not exist."
+			    exit 1
+			fi
+
+			#You can use backticks " ` ` " or $() to execute shell commands. Often $() is easier to read.
+			pattern_count="$(tr --delete '\n' < $1 | grep -o $2 | wc -w)"
+			echo "The pattern $2 occurs ${pattern_count} times in the file $1"
+			exit 0
+		* ```
+		# ./genome.sh genome.txt GATTACA
+		The pattern GATTACA occurs 4 times in the file genome.txt
+			```	
 
 	* c) Write a shell (bash) script called **gengenome.sh**, which generates output that looks like the content of **genome.txt**, but with random choices of A,C,G, or T. Make sure that 
 		* the program generates new random output each time it is called
