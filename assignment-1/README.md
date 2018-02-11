@@ -21,17 +21,29 @@
 		* In the above command the output of du is piped through awk which prints the first column of the output which happens to be the size of the sws1-4226887 folder. The output from awk is then written into the target file 1b.txt which gets automatically created on the fly. Btw, awk is a script language for editing textual data and awk actually stands for the surnames of its creators: Alfred V. Aho, Peter J. Weinberger and Brian W. Kernighan.
 
 	* d) Write all commands that you used for the other parts of this exercise to a text file called **commands** and place this file in the **exercise1** directory.
+		+ **Answer:**
 		* ```
-			mkdir sws1-4226887
-			mkdir sws1-4226887/exercise1 sws1-4226887/exercise2 sws1-4226887/exercise3
-			echo 'Christoph Schmidl, s4226887, c.schmidl@student.ru.nl' > sws1-4226887/names.txt
-			du -sb sws1-4226887
-			du -sb sws1-4226887/ | awk '{print $1}' > sws1-4226887/exercise1/1b.txt
+			# mkdir sws1-4226887
+			# mkdir sws1-4226887/exercise1 sws1-4226887/exercise2 sws1-4226887/exercise3
+			# echo 'Christoph Schmidl, s4226887, c.schmidl@student.ru.nl' > sws1-4226887/names.txt
+			# du -sb sws1-4226887
+			# du -sb sws1-4226887/ | awk '{print $1}' > sws1-4226887/exercise1/1b.txt
 			```
 
 2. Download the file [http://cryptojedi.org/peter/teaching/genome.txt](http://cryptojedi.org/peter/teaching/genome.txt). You will see that it consists of 500 lines, each consisting of 100 characters, each of those characters being A,C,G, or T. See the content in this file as one long sequence of genome.
 
 	* a) Use Linux shell commands to find out how often the subsequence **GATTACA** is contained in this genome? Write your answer and how you found this answer into a file called **2a.txt**. Place this file in the **exercise2** directory. **Hint:** Be careful, the sequence GATTACA may be spread over two line in the file!
+		* **Answer:**
+		* ```
+			# tr --delete '\n' < genome.txt | grep -o 'GATTACA'
+			GATTACA
+			GATTACA
+			GATTACA
+			GATTACA
+			# tr --delete '\n' < genome.txt | grep -o 'GATTACA' | wc -w
+			4
+		```
+		* To fix the problem with newlines interrupting the matching process, the tr command is used (translate or delete characters). Tr is reading in the content of genome.txt and is deleting newlines ('\n') in memory. It is therefore no in-place functionality. After removing all newlines, we essentially are left with one long line which we can pipe towards grep. Grep is used for the matching process with the -o flag (--only-matching) which gives us the occurences of a word every time although it might occur several times in the same line. Without the -o flag, grep only prints out matching lines. So, everytime grep finds the pattern, it prints out the pattern in a new line. All we have to to now is counting the occurences which can be done by the wc command (word count) with either the -w flag (words) or -l (lines) flag. In this scenario it does not really matter. The total occurence of the word GATTACA is therefore 4. 
 
 	* b) Write a shell script called **genome.sh**, which receives as first argument a filename and as second argument a string, and prints, how often the string appears in the file, also counting occurrences of the search string being spread over several lines. Place the script **genome.sh** into the **exercise2** directory.
 
