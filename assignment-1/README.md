@@ -75,8 +75,8 @@
 			echo "The pattern $2 occurs ${pattern_count} times in the file $1"
 			exit 0
 		* ```
-		# ./genome.sh genome.txt GATTACA
-		The pattern GATTACA occurs 4 times in the file genome.txt
+			# ./genome.sh genome.txt GATTACA
+			The pattern GATTACA occurs 4 times in the file genome.txt
 			```	
 
 	* c) Write a shell (bash) script called **gengenome.sh**, which generates output that looks like the content of **genome.txt**, but with random choices of A,C,G, or T. Make sure that 
