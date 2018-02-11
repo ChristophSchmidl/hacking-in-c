@@ -85,36 +85,36 @@
 		* the program prints exactly 500 lines of 100 characters each.
 
 	Place the script **gengenome.sh** into the **exercise2** directory. **Note:** It may be helpful to take a look at bash programming tutorials online.
-		* **Answer:**
-		* ```
-			#!/bin/bash
+	* **Answer:**
+	* ```
+		#!/bin/bash
 
-			# $RANDOM is an internal Bash function (not a constant) that returns a
-			# pseudorandom integer in the range 0 - 32767. It should not be used to
-			# generate an encryption key.
-			# Taken from the documentation
+		# $RANDOM is an internal Bash function (not a constant) that returns a
+		# pseudorandom integer in the range 0 - 32767. It should not be used to
+		# generate an encryption key.
+		# Taken from the documentation
 
-			# Create array with nucleobases
-			nucleobases[0]="A"
-			nucleobases[1]="C"
-			nucleobases[2]="G"
-			nucleobases[3]="T"
+		# Create array with nucleobases
+		nucleobases[0]="A"
+		nucleobases[1]="C"
+		nucleobases[2]="G"
+		nucleobases[3]="T"
 
-			result_genome=""
+		result_genome=""
 
-			for in in {1..500}
+		for in in {1..500}
+		do
+			for j in {1..100}
 			do
-			  for j in {1..100}
-			  do
-			     # Randomly choose an index between 0 and 3 from nucleobases
-			     # and append the nucleobase to the result_genome string
-			     result_genome+=${nucleobases[((RANDOM%4))]}
-			  done
-			  # add a newline after 100 characters
-			  result_genome+=$'\n'
+			   # Randomly choose an index between 0 and 3 from nucleobases
+			   # and append the nucleobase to the result_genome string
+			   result_genome+=${nucleobases[((RANDOM%4))]}
 			done
-			
-			echo "$result_genome"
+			# add a newline after 100 characters
+			result_genome+=$'\n'
+		done
+
+		echo "$result_genome"
 
 	* d) Write a C program called **parsegenome.c**, which checks whether a file given as first command-line argument is of the format of the genome.txt file, i.e., whether it has exactly 500 lines with 100 characters (+ newline) each, where each of the 100 characters of each line is one of either A,C,G or T. Let the program return -1 if the file does **not** have the correct format and 0 if the file has the correct format. Furthermore, if the file has the correct format, make sure that the program counts how often each of the 4 characters occurs and print these 4 counts to standard output. Place the file **parsegenome.c** into the **exercise2** directory.
 
