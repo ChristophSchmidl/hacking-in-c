@@ -117,8 +117,108 @@
 		echo "$result_genome"
 
 	* d) Write a C program called **parsegenome.c**, which checks whether a file given as first command-line argument is of the format of the genome.txt file, i.e., whether it has exactly 500 lines with 100 characters (+ newline) each, where each of the 100 characters of each line is one of either A,C,G or T. Let the program return -1 if the file does **not** have the correct format and 0 if the file has the correct format. Furthermore, if the file has the correct format, make sure that the program counts how often each of the 4 characters occurs and print these 4 counts to standard output. Place the file **parsegenome.c** into the **exercise2** directory.
+		* **Answer:**
+		* ```
+			#include <stdio.h>
+			#include <stdlib.h>
+			#include <stdbool.h>
+
+			bool isNucleobase(char c);
+
+			int main(int argc, char *argv[])
+			{
+			    if (argc != 2)
+			    {
+			        /* argv[0] is the name of the program  */
+			        printf( "Usage: %s filename\n", argv[0] );
+				return (EXIT_FAILURE);
+			    }
+			    else
+			    {
+			        char const* const fileName = argv[1];
+			        FILE *file = fopen(fileName, "r");
+				char line[256];
+
+			        if (file == 0)
+			        {
+			            printf("Could not open file\n");
+			        }
+			        else
+			        {
+				    int lines = 0;
+				    int totalNumberOfChars = 0;
+				    int amountOfA = 0;
+				    int amountOfC = 0;
+				    int amountOfG = 0;
+				    int amountOfT = 0;
+
+				    // Loop through the file line by line
+				    while (fgets(line, sizeof(line), file)) {
+				    	lines++;
+
+					// Check if the 101th character is a newline \n
+			            	if ( line[100] != '\n'){
+				    		return -1; // Invalid format
+				    	}
+
+					// Check if the first 100 characters are nucleobases
+					for(int i = 0; i <= 99; i++)
+					{
+						if ( ! isNucleobase(line[i]))
+						{
+							return -1; // Invalid format
+						}
+
+						totalNumberOfChars++;
+
+						// Count the number of nucleobases
+						switch(line[i]) {
+							case 'A':
+								amountOfA++;
+			     					break;
+			    				case 'C':
+								amountOfC++;
+			      					break;
+			    				case 'G':
+								amountOfG++;
+			     					break;
+			    				case 'T':
+								amountOfT++;
+			  			}
+					}
+			            }
+
+				    // Check if there are 500 lines
+			            if (lines != 500) return -1; // Invalid format
+
+				    printf("%s", "Valid format.\n");
+				    printf("Total number of characters (without newlines): %d\n", totalNumberOfChars);
+				    printf("Total number of lines: %d\n", lines);
+				    printf("Occurrences of A: %d\n", amountOfA);
+				    printf("Occurrences of C: %d\n", amountOfC);
+				    printf("Occurrences of G: %d\n", amountOfG);
+				    printf("Occurrences of T: %d\n", amountOfT);
+
+			    	    fclose(file);
+			            return 0;
+			        }
+			    }
+			}
+
+			bool isNucleobase(char c)
+			{
+				if ( c == 'A' || c == 'C' || c == 'G' || c == 'T')
+				{
+					return true;
+				}
+				return false;
+			}
 
 	* e) Write a Makefile that compiles **parsegenome.c** and place the Makefile into the **exercise2** directory.
+		* **Answer:**
+		* ```
+			parsegenome: parsegenome.c
+			gcc -o parsegenome parsegenome.c
 
 3. Unix and Linux systems use special files in the **/dev** directory to handle access to devices. Two such special device files provide a source of random numbers. These files are **/dev/random** and **/dev/urandom**.
 
