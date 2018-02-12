@@ -280,6 +280,37 @@
 		* Run the program 10 times and each time count the number of output lines. Write these counts to a text file called **exercise3d.txt**
 		* **Answer:**
 		* ```
+			#include <stdio.h>
+			#include <stdlib.h>
+			#include <stdint.h>
+
+			int main(int argc, char *argv[])
+			{
+				char const* const fileName = "/dev/urandom";
+				FILE *file = fopen(fileName, "r");
+
+			        if (file == 0)
+			        {
+			            printf("Could not open file\n");
+			        }
+			        else
+				{
+				    uint16_t a = 0;
+
+				    // Loop through the file and get two bytes
+				    while (1) {
+					fread(&a, 2, 2, file);
+					// Use 0 to get zero padding and 4 to set the width to 4.
+					// %x = Unsigned hexadecimal integer
+					// See: https://stackoverflow.com/questions/8060170/printing-hexadecimal-characters-in-c
+					printf("%04x\n", a);
+					if (a == 42) break;
+			            }
+
+			    	    fclose(file);
+			            return 0;
+			        }
+			}
 
 	* e) Write a brief description of how you obtained the line counts in part d) in a text file called **exercise3e.txt**
 		* **Answer:** I used a simple loop in bash. I execute the exercise3d program and pipe its output to the wc command (word count) with the -l flag. This flag counts the number of lines. After that I create the exercise3d.txt file on the fly and append the output from wc in every iteration.
