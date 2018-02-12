@@ -233,8 +233,45 @@
 		* exits (from the loop) if the value of the byte is 42
 	The last line of output from the program should be 42 42 2a
 	Place the file **exercise3b.c** into the **exercise3** subdirectory.
+		* **Answer:**
+		* ```
+			#include <stdio.h>
+			#include <stdlib.h>
+
+			int main(int argc, char *argv[])
+			{
+				char const* const fileName = "/dev/urandom";
+				FILE *file = fopen(fileName, "r");
+				char line[256];
+
+			        if (file == 0)
+			        {
+			            printf("Could not open file\n");
+			        }
+			        else
+				{
+				    char a = 'a';
+			  	    //printf("Size of char : %d\n", (char)sizeof(a));
+				    // char = 1 byte
+
+				    // Loop through the file and get one byte
+				    while (1) {
+					fread(&a, 1, 1, file);
+					// %d = Signed decimal integer
+					// %u = Unsigned decimal integer
+					// %x = Unsigned hexadecimal integer
+					// See: http://www.cplusplus.com/reference/cstdio/printf/
+					printf("%d %u %x\n", a, a, a);
+					if (a == 42) break;
+			            }
+
+			    	    fclose(file);
+			            return 0;
+			        }
+			}
 
 	* c) Run the program and write the output to a file called **exercise3c**; place this file into the **exercise3** subdirectory.
+		* **Answer:** See exercise3c.
 
 	* d) Write another program called **exercise3d.c**, which does the same as **exercise3b.c**, except for the following
 		* Use 16-bit unsigned integers instead of bytes (datatype uint16_t, you need to include the file stdint.h)
