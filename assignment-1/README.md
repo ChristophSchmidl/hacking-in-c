@@ -242,7 +242,6 @@
 			{
 				char const* const fileName = "/dev/urandom";
 				FILE *file = fopen(fileName, "r");
-				char line[256];
 
 			        if (file == 0)
 			        {
@@ -275,11 +274,16 @@
 
 	* d) Write another program called **exercise3d.c**, which does the same as **exercise3b.c**, except for the following
 		* Use 16-bit unsigned integers instead of bytes (datatype uint16_t, you need to include the file stdint.h)
-		* In the loop, initialize the 16-but unsigned integer with two random bytes (16 bits) from **/dev/urandom**
+		* In the loop, initialize the 16-bit unsigned integer with two random bytes (16 bits) from **/dev/urandom**
 		* In the loop, print one line containing the value of the 16-bit unsigned integer as fixed-width 4-character hexadecimal value (padded at the front with leading zeros)
 		* Again, terminate the loop of the value is 42, the last line of output is thus 002a
 		* Run the program 10 times and each time count the number of output lines. Write these counts to a text file called **exercise3d.txt**
+		* **Answer:**
+		* ```
+
 	* e) Write a brief description of how you obtained the line counts in part d) in a text file called **exercise3e.txt**
+		* **Answer:** I used a simple loop in bash. I execute the exercise3d program and pipe its output to the wc command (word count) with the -l flag. This flag counts the number of lines. After that I create the exercise3d.txt file on the fly and append the output from wc in every iteration.
+		* `# for run in {1..10}; do ./exercise3d | wc -l >> exercise3d.txt; done`
 	
 	* f) Place the files **exercise3d.c**, **exercise3d.txt** and **exercise3e.txt** into the **exercise3** subdirectory.
 
