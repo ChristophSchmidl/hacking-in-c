@@ -1,0 +1,27 @@
+The following locations mark the beginning of the 
+reserved memory for each variable.
+Based on their size, each variable allocates another
+range of locations.
+
+i is stored at location: 0x7fffae2df4ca
+x is stored at location: 0x7fffae2df4c9
+sn1 is stored at location: 0x7fffae2df4d0
+sn2 is stored at location: 0x7fffae2df4d8
+y is stored at location: 0x7fffae2df4e0
+
+The translation of the byte values in each location
+are dependent on the actual endiannes of the machine.
+In my case, the hex content can only be translated to 
+my decimal representation of my studentnumber by 
+switching the order. Example:
+
+0x7fffae2df4d0       0x47                   71                  
+0x7fffae2df4d1       0x7f                   127                 
+0x7fffae2df4d2       0x40                   64       
+
+0x477f40 = 4685632
+but should be 
+0x407f47 = 4226887
+
+Using a function like htons() can help to make this translation
+consistent on every machine.
