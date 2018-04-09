@@ -46,7 +46,7 @@
 * **Creating and dereferencing pointers**
 * **Confused? draw pictures!**
 * **Pointer quiz**
-* **Style debate: int* p or int *p**
+* **Style debate: int&ast; p or int &ast;p**
 
 ## Lecture 3: Memory layout
 
