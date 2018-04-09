@@ -67,42 +67,49 @@
 1. **(6 points)** 
 
 
-* a) What should be filled in for the ... below to declare **x, y, z,** and **w** with the right types?
+	* a) What should be filled in for the ... below to declare **x, y, z,** and **w** with the right types?
 
-	* ```
-		void f(){
-			int* i;
-			int* a[5];
-			... x = &i;
-			... y = *i;
-			... z = a[3];
-			... w = a;
-		} 
+		* ```
+			void f(){
+				int* i;
+				int* a[5];
+				... x = &i;
+				... y = *i;
+				... z = a[3];
+				... w = a;
+			} 
 
-	* Answer:
-
-
-
-
-* b) Assume that the attacker at IP address 192.168.1.66 runs an ARP spoofing attack to become a man in the middle between 192.168.1.1 and 192.168.1.2. Assume further that the attacker uses **ARP request spoofing** with the destination MAC address set as usual for ARP requests. What ARP request messages does the attacker have to send? Give destination IP and MAC address and source IP and MAC address for all packets.
-
-		* Answer
-
-
-* c) What does the ARP cache of 192.168.1.3 look like after the attack? **Note:** The question is **not** about the ARP cache of one of the targets of the attack!
-
-		* Answer
-
-
-* d) How could 192.168.1.2 have prevented the attack?
-
-		* Answer
+		* Answer:
 
 
 
-2. **(20 points)** Consider again the network from exercise 1. Assume that a new computer joins that network (by plugging in a cable and booting up). Assume that this new computer does not know anything about the network and attempts to learn the network configuration via DHCP.
 
-	* a) What pieces of information does the new computer need to receive via DHCP so that the user can fire up a browser, enter http://wikipedia.com in the address bar and the website of wikipedia.com actually loads?
+	* b) In the code sample above, will **a** be allocated on the heap or the stack?
+
+		* Answer:
+
+
+	* c) What are the values of **i** and **s** after executing the code below? Assume that **p, q, r** and **s**, have been declared with the correct types.
+
+		* ```
+			int32_t i = 5; // Recall: int32_t is the type of signed 32 bit integers
+			p = &i;
+			q = &p;
+			r = *q;
+			s = **q;
+			(*p)++;
+			(*q)++;
+			(*r)++;
+			s++;
+
+		* Answer:
+
+
+2. **(5 points)** Suppose the code below is compiled for a 64 bit architecture.
+
+
+
+	* a) 
 
 		* Answer
 
