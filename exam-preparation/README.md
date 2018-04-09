@@ -46,9 +46,32 @@
 * **Creating and dereferencing pointers**
 * **Confused? draw pictures!**
 * **Pointer quiz**
-* **Style debate: int&ast; p or int &ast;p**
+* **Style debate: int&ast; p or int &ast;p?**
+* **Still not confused?**
+* **Still not confused? pointers to pointers**
+* **Pointer test (Hint: example exam question)**
+* **Pointers (continued), arrays and strings**
+* **Pointer arithmetic**
+* **Using pointers as arrays**
+* **Pointer arithmetic for strings**
+* **Arrays vs pointers**
+* **Using pointers as arrays**
+* **A problem with pointers: ...**
+* **Two pointers are called aliases if they point to the same location**
+* **Recap - so far**
+* **The potentical of pointers: inspecting raw memory**
+* **Turning pointers into numbers**
+* **Strings**
+* **String problems**
+* **Safer strings and array?**
+* **A final string pecularity**
+* **Recap**
 
 ## Lecture 3: Memory layout
+
+* **A short recap**
+* **Memory segments**
+* **/proc/&lt;pid&gt;/maps, ps, and size**
 
 
 
