@@ -70,14 +70,15 @@
 * a) What should be filled in for the ... below to declare **x, y, z,** and **w** with the right types?
 
 	* ```
-		void f(){
-			int* i;
-			int* a[5];
-			... x = &i;
-			... y = *i;
-			... z = a[3];
-			... w = a;
-		}
+	void f(){
+		int* i;
+		int* a[5];
+		... x = &i;
+		... y = *i;
+		... z = a[3];
+		... w = a;
+	}
+	```
 
 	* Answer:
 
