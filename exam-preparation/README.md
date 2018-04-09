@@ -1,64 +1,54 @@
 # Hacking in C - Exam Preparation
 
-## Lecture 1: Security in local-area networks
+## Lecture 1: General information and the C programming language
 
-* Netcat example
-	* Command in tyrion: ``` netcat -lp 51966 ```
-	* Command on arya: ``` echo "Hi tyrion" | netcat tyrion 51966 ```
-* How does arya know tyrions IP address? -> she sends and ARP request to the broadcast MAC address (ff:ff:ff:ff:ff:ff) and gets a arp reply from tyrion with "192.168.42.1 is at 50:75.9d.f3:db:29"
-* The above example is sent over a TCP/IP connection
-* Network sniffing through Hubs and Switched Ethernet. Switches are aware of the MAC addresses behind their ports and do not broadcast every packet.
-* **ARP Cache poisoning/ARP spoofing** still works for Switched Ethernet though
-	* **Gratuitous ARP packets** are announcements ("replies without a request"). There are good reasong for this kind of announcements like announcing IP+MAC at boot time, announcing changed IP address to other hosts or ip-adress takeover in high performance clusters
-* In order to use arp spoofing, IP forwarding should be enabled: ``` echo 1 > /proc/sys/net/ipv4/ip_forward ```	
-* Poisoning the ARP cache of 192.168.42.2: ``` arpspoof -t 192.168.42.2 192.168.42.3 ```
-* **MAC flooding**: Send many Ethernet frames with different source MAC addresses which overflows the **Content addressable memory (CAM)** of the switch
-	* The effect of this depends highly on the switch itself
-	* Some switches will fall back to behave like a hub 
-* **ARP-attack countermeasures**:
-	* static ARP table entries
-	* disable gratuitous ARP (may break stuff)
-	* ARP filter -> arptables
-	* arpwatch
-	* Protection mechanisms on advanced switches like "Dynamic ARP Inspection"
-	* Protection against ARP spoofing is hard in general because ARP does not have any authentication mechanism
-* **VLANs**
-	* Partioning of local-area network (LAN) into multiple virtual LANs (VLANs)
-	* VLANs have separated broadcast domains
-	* ARP requests/replies don't go from one VLAN to another
-	* Can limit the damage caused by ARP-level attacks ("students can only attack each other")		
-* **MAC address filtering**
-	* Switches could use a whitelist of MAC addresses and ignore computers with unknown MAC addresses
-	* **MAC spoofing** is an easy way to circumvent Mac address filtering
-	* ``` ip link set dev eth0 down; ip link set dev eth0 address 42:42:42:42:42:42; ip link set dev eth0 up```
-* Wireless networks: **IEEE 802.11**
-	* Networks are logically separated by their network names (**service set identification, SSID**)
-	* Communication is physically separated by using different **channels (frequencies)**
-	* Two different modes of operation: **ad-hoc mode: peer-to-peer** and **infrastructure mode: communication through access point(AP)**
-* Connecting to a WiFi network
-	* Connections to a wireless network are handled through **management frames**
-	* Other important management frames:
-		* **Reassociate request/response frames: change the AP**
-		* **Disassociate frame: leave the network**
-	* APs send **beacon frames** (by default, 10/second) containing:
-		* Timestamp
-		* Beacon interval
-		* SSID
-		* Frequency-hopping parameters
-* **Hidden SSID**
-	* Clients need to know the SSID to authenticate/associate
-	* Idea: Don't send this SSID in beacon frames and advertise this as "network cloaking"
-	* Network is not really cloaked, SSID is also contained in other frames
-* Encrypted WiFi
-	* **WEP (Wired Equivalent Privacy)** uses RC4 with 40-bit key and 24-bit IV -> weak encryption
-	* RC4/WEP can be broken after 40000 frames with probability > 50% and after 85000 frames with probability > 95%
-	* WEP-104 can be broken in less than a minute
-	* **WPA (WiFi Protected Access)** uses **Temporal Integrity Protocol (TKIP)** which is a wrapper around RC4
-	* WPA is therefore still vulnerable
-	* **WPA2** got rif of RC4 and uses CCMP instead with a 128-bit AES key but sometimes provides backwards-compatibility to TKIP
-	* **WPS (WiFi Protected Setup)** is still a possibility to circumvent WPA2 but is disabled but most routers
+	* **The C programming language**
+		* Invented by Dennis Ritchie in the early 70s
+	* **C standards and "standards"**
+	* **C vs. C++**
+	* **A "portable assembler"**
+	* **"If programming languages were..."**
+	* **Syntax and semantics**
+	* **Unspecified behavior**
+	* **C compilation**
+	* **Memory abstraction 1: where data is stored**
+	* **Where is data allocated?**
+	* **register**
+	* **Memory abstraction 2: how data is stored**
+	* **char**
+	* **Another quick question...**
+	* **Other integral types**
+	* **Floating-point and complex values**
+	* **Printing values**
+	* **stdint.h**
+	* **Implicit type conversion**
+	* **Explicit casts**
+	* **A small quiz**
+	* **Two's complement**
+	* **Endianess**
+	* **Endianess, let's try again**
+	* **Endianess, the conclusion**
+
+## Lecture 2: Pointers
 
 
+
+## Lecture 3: Memory layout
+
+
+
+
+## Lecture 4: Attacks, part I
+
+
+
+
+## Lecture 5: Attacks, part II
+
+
+
+
+## Lecture 6: Attacks, part III
 
 
 
