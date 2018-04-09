@@ -107,110 +107,171 @@
 
 2. **(5 points)** Suppose the code below is compiled for a 64 bit architecture.
 
+	* ```
+		void f(){
+			int32_t a[4]; // Recall: int32_t is the type of signed 32 bit integers
+			char c;
+			int32_t d[2];
+			char b[7];
+			int64_t i; // Recall: int64_t is the type of signed 64 bit integers
+			...
+		} 
 
 
-	* a) 
+	* a) What would be an obvious way for a compiler to minimise the amount of stack space needed for this function, without compromising execution speed?
 
-		* Answer
+		* Answer:
 
-	* b) Assume that an attacker with IP address 192.168.1.66 sets up a rogue DHCP server to become a man in the middle between the new computer and wikipedia.com. Which of the pieces of information from part a) could he modify to become a man in the middle? What information would he send? How would the attack proceed (if there are any further steps required)? Give all possibilities for an attack.
+	* b) Write a piece of C code that could go in the place of the dots that would return "yes" if the compiler has optimised the stack layout as you suggested in a). Explain the idea behind the code.
 
-		* Answer
+		* Answer:
 	
 
-	* c) Why could a rogue-DHCP attack fail? What possibilities does an attacker have to increase the chances of success?
-
-		* Answer
 
 
-3. **(20 points)** For each of the following three different port scan types
-
-	* connect scan, 
-	* SYN scan,
-	* idle scan
-
-	answer the following questions:
-
-	* a) How does it work? What packets are being sent to probe whether the port is open, what answer packet(s) are expected if the port is open, what answer packet(s) are expected if it's closed?
-
-		* **Connect scan**: The connect scan is not using raw packets but the underlying connect() system call of the operating system to connect to a remote port. If connect() succeeds then the port is open, if connect() fails then the port is closed. This can method relies on the Berkeley Sockets-API.
-		* **SYN scan**: The SYN scan sends TCP SYN packets and receives a SYN/ACK packet if the port is open and a RST packet if the port is closed.
-		* **Idle scan**: Idle scans rely on a so called zombie host and the fragment identification number (IPID) of IP packets. A zombie host is a idle machine on the network. First you have to probe the zombie's IPID and record it (IPID=X). Then forge a SYN packet from the zombie to the target host and port. Probe the zombie's IPID again (IPID=Y). If Y = X + 1 then the port is closed, if Y = X + 2 then the port is open.
-
-	* b) The scans are listed in increasing order of "stealthiness". Explain briefly why this is the case by explaining how a system administrator could notice those scans and attribute their origin.
-	
-		* **Connect scan**: Connect scan takes the underlying socket api and performs full connects which reveals the ip address of the source and always closes its connections properly which let them appear in the server logs.
-		* **SYN scan**: SYN scans also reveal the ip address of the source but SYN scans do not close the connections properly all the time and are left with a half open connection which may not appear in the server logs. The ip address is visible nevertheless and could be traced by any good intrusion system.
-		* **Idle scan**: Idle scans have the advantage that they only reveal the ip address of the zombie host and not the original source. Idle scans also use SYN packets but perform their analysis of an open port based on the IPID.
-
-
-4. **(20 points)** Consider the following iptables firewall script running on a laptop called **mylaptop**:
+3. **(5 points)** Consider the following code
 
 	* ```
-		iptables -F
-		iptables -P INPUT DROP
-		iptables -P OUTPUT DROP
-		iptables -P FORWARD DROP
-		iptables -A OUTPUT -p tcp --dport 22 -j ACCEPT
-		iptables -A OUTPUT -p tcp --dport 80 -j ACCEPT
-		iptables -A OUTPUT -p tcp --dport 443 -j ACCEPT
-		iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
-		iptables -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+		#include <stdio.h>
+		#include <stdint.h>
 
-	For each of the following tasks decide whether the firewall allows it or not. If the firewall does not allow it, give an iptables rule that enables it. In each part you can assume the presence of additional rules from the previous parts. **Note:** The rules have to be minimal and must not allow anything beyond the required functionality; in particular something like **iptables -P INPUT ACCEPT** is not a valid solution.
+		int main() {
+			int32_t x[4];
+			x[0] = -2;
+			x[1] = 34;
+			x[2] = 1|2|4; // | is bitwise OR
 
-	* a) A web browser running on mylaptop tries to load the website at https://www.google.com
+			printf("%lx \n", x);
+			printf("%lx \n", x+2); // (a)
+			printf("%lx \n", &x); // (b)
+			printf("%lx \n", &x+2); // (c)
+			printf("%lx \n", *(x+1) & 2); // (d) & is bitwise AND
+			printf("%lx \n", *x + x[2]); // (e)
+			return 0;
+		}
 
-		* The firewall **allows** it based on the fact that outgoing connections on port 80 (http) and port 443 (https) are allowed and the resulting tcp handshake results into a established/related connection which is allowed by the last rule as input.
+	* Recall that **%lx** prints a long in hexadecimal notation. Assume that the target machine uses two's complement to represent negative integers. If the first call to **printf** prints **abcdabcdef00**, what do the other calls to **printf** print?	
 
-	* b) The user runs the ping utility on my laptop to test whether the host www.ru.nl is reachable.
+		* Answer:
+
+
+
+4. **(8 points)** Consider the code below. The code is legal C.
+
+	* ```
+		1. char* f(char* w) {
+		2. 		char *groet = "hello";
+		3. 		char *t = malloc(50);
+		4. 		char *u = malloc(50);
+		5. 		char z[50];
+		6. 		strcpy(u,groet); // copies the string groet to u
+		7. 		u[5] = ’!’;
+		8. 		t = w;
+		9. 		printf("String t is now %s.\n", t);
+		10. 	t = u;
+		11. 	printf("String t is now %s.\n", t);
+		12. 	free(t);
+		13. 	free(z);
+		14. 	return u;
+		15. }
+
+	* a) What are the 5 errors in the program above? (One error occurs two times, so there are in fact 6 errors.) For each error, mention the line number(s) involved, and explain what is wrong.
+
+		* Answer:
+
+	* b) Could the print statement in line 9 cause a segmentation fault? Motivate your answer.
 	
-		* The firewall **allows** it based on the fact that outgoing icmp echo-requests are allowed and and related/established connections are allowed as input.
+		* Answer:
 
-	* c) A mail client on mylaptop retrieves e-mail from post.science.ru.nl through IMAPS (TCP port 993)
+	* c) Is it possible to say what the **printf** statement in line 11 will print (if the program does not crash before)? If so, say what it prints; if not, explain why.
 	
-		* Is **not allowed** by the current firewall rules. Rule to allow IMAPS: ``` iptables -A OUTPUT -p tcp --dport 993 -j ACCEPT ```. You could do the same for port 143 (IMAP).
+		* Answer:		
 
-	* d) Another computer (not the laptop with the firewall) uses the ping utility to test whether mylaptop is reachable.
 
-		* Is **not allowed** by the current firewall rules. Rule to allow incoming ping requests: ``` iptables -A OUTPUT -p icmp --icmp-type echo-reply -j ACCEPT ```
 
-	* e) Somebody else from outside tries to connect to the SSH server running on port 22 of mylaptop.
+
+
+5. **(8 points)** Consider the code below. We assume the compiler does not optimise away redundant variables such as **secret**. The code for functions **f** and **g** is not shown.
+
+	* ```
+		1. main () {
+		2. 		proc1();
+		3. }
+		4.
+		5. proc1() {
+		6. 		int secret = 1234;
+		7. 		proc2();
+		8. }
+		9.
+		10. proc2() {
+		11. 	int public = 024;
+		12. 	f();
+		13. 	printf("f is done");
+		14. 	g();
+		15. 	printf("The area code is %i", public);
+		16. }
+
+
+		
+
+	* Suppose that the function **f** contains some memory weaknesses, which an attacker can exploit to inspect and/or corrupt the stack by supplying malicious input. We assume there are not countermeasures against this, such as stack canaries or a non-executable stack. In answering the questions below, when talking about stack frames always make it clear to which function these belong.
+
+
+	* a) Could an attacker corrupt the stack during the call to **f** in such a way that after returning from **f** the print statement on line 13 is not executed, but in all other respects execution continues as it normally would? Moativate your answer, by explaining why not, or by explaining how the attacker might achieve this.
 	
-		* Is **not allowed** by the current firewall rules. Rule to allow SSH from outside: ``` iptables -A INPUT -p tcp --dport 22 -j ACCEPT ```
+		* Answer:
 
+	* b) Could an attacker corrupt the stack during the call to **f** so that the value of **secret** will be printed instead of the value of **public** when execution reaches line 15? Motivate your answer, by explaining why not, or by explaining how the attacker might achieve this.
 
-5. **(20 points)** Consider a confidential e-mail being sent from a user A (using e-mail provider P_A) to another user B (using e-mail provider P_B). Consider the following independent cryptographic protections for this e-mail communication:
+		* Answer:
 
-	* P1: User A is in a WPA2-protected WiFi using pre-shared keys.
-	* P2: User A uses TLS to communicate with the SMTP server of P_A.
-	* P3: User B uses TLS to communicate with the IMAP server of P_B.
-	* P4: Provider P_A and P_B communicate through IPSec with encapsulated security payloads (ESP) in tunnel mode.
-	* P5: User A obtains B's PGP public key from pgp.mit.edu and then encrypts the e-mail using PGP with this public key.
-
-	Consider the following attacks against this e-mail communication:
-
-	* A1: An attacker, who is not the in WiFi network that A is in, sniffs the WiFi traffic near A to read the e-mail.
-	* A2: An attacker, who is in the WiFi network that A is in, sniffs the WiFi traffic to read the e-mail
-	* A3: An attacker, who is in the same network that B is in, sniffs the network to read the e-mail.
-	* A4: An attacker (controlling an Internet router) sniffs the traffic between A and the SMTP server of P_A.
-	* A5: An attacker (controlling an Internet router) sniffs the traffic between P_A and P_B.
-	* A6: A's provider is reading and analyzing the e-mail.
-	* A7: B's provider is reading and analyzing the e-mail.			
-
-	* a) Fill in a checkmark in each cell of the following table, if and only if the cryptographic protection alone is effective to prevent the attack:
-
-		* ![SecureTable](img/table.PNG)
-
-		**Note:** Don't forget to submit this sheet together with your exam or copy the table to your exam sheet.
-
-		* ![FilledSecureTable](img/filled_table.png)
-
-	* b) Can you think of an attack that would work against each of the protections (and any combination of those)?
+	* c) Would having a non-executable stack prevent any attacks you discussed in your answers to a) or b) above?
 	
-		* Answer		
+		* Answer:
 
+	* d) To provide some additional security, the programmer replaces line 12 with the following lines:
 
+		* ```
+			12a.	int test = 2525;
+			12b.	f();
+			12c.	if (test != 2525) { exit(-1); }
+
+		* Does this provide any additional security? Motivate your answer. (Here assume that the compiler does not optimise the superfluous if-statement away because the **then**-branch is unreachable.)
+
+			* Answer:	
+
+5. **(8 points)** The code running on the vulnerable server hackme.cs.ru.nl for the last assignment was something like
+
+	* ```
+		1. #include <stdio.h>
+		2.
+		3. void echostr(void) {
+		4. 		char buffer[80];
+		5. 		gets(buffer);
+		6. 		printf(buffer);
+		7. 		printf("\n");
+		8. }
+		9.
+		10. int main(void) {
+		11. 	while (1) { echostr(); }
+		12. 	return 0;
+		13. }
+
+	* a) What are the two security vulnerabilities in this code?
+	
+		* Answer:
+
+	* b) How would you fix these vulnerabilities?
+	
+		* Answer:
+
+	* c) To craft the attack string to launch a shell, in addition to the actual shell code, the attacker needs still some additional information. What is additional information that the attacker needs?
+	
+		* Answer:
+
+	* d) Did the vulnerable server that you had to take over using the given shell code run with a non-executable stack? Or was the impossible to tell from the attack? Motivate your answer.
+	
+		* Answer:				
 
 
 
