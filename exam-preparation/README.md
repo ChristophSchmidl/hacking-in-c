@@ -2,32 +2,32 @@
 
 ## Lecture 1: General information and the C programming language
 
-	* **The C programming language**
-		* Invented by Dennis Ritchie in the early 70s
-	* **C standards and "standards"**
-	* **C vs. C++**
-	* **A "portable assembler"**
-	* **"If programming languages were..."**
-	* **Syntax and semantics**
-	* **Unspecified behavior**
-	* **C compilation**
-	* **Memory abstraction 1: where data is stored**
-	* **Where is data allocated?**
-	* **register**
-	* **Memory abstraction 2: how data is stored**
-	* **char**
-	* **Another quick question...**
-	* **Other integral types**
-	* **Floating-point and complex values**
-	* **Printing values**
-	* **stdint.h**
-	* **Implicit type conversion**
-	* **Explicit casts**
-	* **A small quiz**
-	* **Two's complement**
-	* **Endianess**
-	* **Endianess, let's try again**
-	* **Endianess, the conclusion**
+* **The C programming language**
+	* Invented by Dennis Ritchie in the early 70s
+* **C standards and "standards"**
+* **C vs. C++**
+* **A "portable assembler"**
+* **"If programming languages were..."**
+* **Syntax and semantics**
+* **Unspecified behavior**
+* **C compilation**
+* **Memory abstraction 1: where data is stored**
+* **Where is data allocated?**
+* **register**
+* **Memory abstraction 2: how data is stored**
+* **char**
+* **Another quick question...**
+* **Other integral types**
+* **Floating-point and complex values**
+* **Printing values**
+* **stdint.h**
+* **Implicit type conversion**
+* **Explicit casts**
+* **A small quiz**
+* **Two's complement**
+* **Endianess**
+* **Endianess, let's try again**
+* **Endianess, the conclusion**
 
 ## Lecture 2: Pointers
 
