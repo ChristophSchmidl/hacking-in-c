@@ -72,19 +72,89 @@
 * **A short recap**
 * **Memory segments**
 * **/proc/&lt;pid&gt;/maps, ps, and size**
-
-
+* **Virtual memory**
+* **Advantages of virtual memory**
+* **Bare-metal "memory management"**
+* **Global variables**
+* **Static variables**
+* **The stack - a simple datastructure**
+* **Stack frames and the stack pointer**
+* **A zoom into the stack frame**
+* **The frame pointer**
+* **Size of the stack**
+* **Things that may go wrong on the stack**
+* **... how bad is "wrong" exactly?**
+* **What went wrong?**
+* **Hardware specifics**
+* **Limitations of the stack**
+* **The heap**
+* **malloc**
+* **NULL**
+* **Always check for malloc failure!**
+* **free**
+* **realloc**
+* **Dangling pointers, double free, ...**
+* **Stack vs. heap vs. data segment**
+* **What's wrong with this code?**
+* **valgrind**
 
 
 ## Lecture 4: Attacks, part I
 
-
+* **A short recap**
+* **calloc**
+* **malloc vs. calloc**
+* **Heap management**
+* **Reading and manipulating data**
+* **Attack scenario**
+* **Format-string attacks**
+* **A simple main**
+* **argc and argv**
+* **Arguments passing, the "easy" way**
+* **Arguments passing on AMD64**
+* **Format strings**
+* **Leaking data with format strings**
+* **Corrupting data with format strings**
+* **Evil formatstrings (summary)**
+* **The first format-string attack**
+* **Getting rif of format-string attacks**
+* **Buffer Overflows**
+* **No bounds checking - what could go wrong?**
+* **How Heartbleed works**
+* **Overwriting data on the stack**
+* **The return of the ping of death**
 
 
 ## Lecture 5: Attacks, part II
 
-
-
+* **A short recap**
+* **Failing at demos...**
+* **gets**
+* **A simple example**
+* **Changing program flow**
+* **Overwriting return addresses**
+* **Running our own code**
+* **Launching a shell**
+* **execve**
+* **Shell code, part I**
+* **Shell code, part II**
+* **The complete shell code**
+* **Why did we use this shift?**
+* **A nop sled**
+* **Putting it together**
+* **... but gets is deprecated**
+* **The underlying problem**
+* **Defense mechanisms**
+* **Fixing programs**
+* **libsafe**
+* **Dynamic analysis**
+* **Static analysis**
+* **What can the compiler do to help?**
+* **Can you attack the following code?**
+* **Stack protection with canaries**
+* **Compiler-generated canaries**
+* **W &oplus; X**
+* **Enabling/disabling NX**
 
 ## Lecture 6: Attacks, part III
 
