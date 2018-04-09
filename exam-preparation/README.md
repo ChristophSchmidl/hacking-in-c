@@ -158,7 +158,29 @@
 
 ## Lecture 6: Attacks, part III
 
-
+* **A short recap**
+* **Return to libc**
+* **Preparing arguments**
+* **"The olds days" (x86)**
+* **Nowadays: AMD64 (x64, x86-64)**
+* **Countermeasures**
+* **Return Oriented Programming (ROP)**
+* **ROP: Example**
+* **ASLR**
+* **Attacks against ASLR**
+* **Spot the defect - Heartbleed**
+* **Spot the defect - Cloudbleed**
+* **How common are these problems?**
+* **CWE classification**
+* **Example vulnerable code**
+* **Normal execution**
+* **Attack scenario 1**
+* **Attack scenario 2**
+* **Attack scenario 3**
+* **Attack scenario 4**
+* **Attack scenario 5**
+* **Attack scenario 6**
+* **Attack scenario 7**
 
 ## Mock Exam
 
