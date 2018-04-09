@@ -31,7 +31,22 @@
 
 ## Lecture 2: Pointers
 
-
+* **Allocation of multiple variables**
+* **Printing addresses where data is located**
+* **Data alignment**
+* **Arrays**
+* **Array bounds checking**
+* **Typical software security vulnerabilities**
+* **Array bound checking**
+* **Overrunning arrays**
+* **Arrays and alignment**
+* **Arrays are passed by reference**
+* **Retrieving addresses of pointers using &**
+* **Declaring pointers**
+* **Creating and dereferencing pointers**
+* **Confused? draw pictures!**
+* **Pointer quiz**
+* **Style debate: int* p or int *p**
 
 ## Lecture 3: Memory layout
 
