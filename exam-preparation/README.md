@@ -246,10 +246,10 @@
 		1. #include <stdio.h>
 		2.
 		3. void echostr(void) {
-		4. 		char buffer[80];
-		5. 		gets(buffer);
-		6. 		printf(buffer);
-		7. 		printf("\n");
+		4.		char buffer[80];
+		5.		gets(buffer);
+		6.		printf(buffer);
+		7.		printf("\n");
 		8. }
 		9.
 		10. int main(void) {
